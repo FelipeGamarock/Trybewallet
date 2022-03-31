@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 
+const MIN_PASSWORD_LENGTH = 6;
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -8,14 +10,27 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      isDisable: false,
+      isDisable: true,
       redirect: false,
     };
+  }
+
+  // Codigo para validação de email tirada de:
+  // https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript
+  verifyInputs = () => {
+    this.setState({ isDisable: true });
+    const { email, password } = this.state;
+    if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+      && password.length >= MIN_PASSWORD_LENGTH) {
+      this.setState({ isDisable: false });
+    }
   }
 
   handleInput = ({ target }) => {
     this.setState({
       [target.name]: target.value,
+    }, () => {
+      this.verifyInputs();
     });
   }
 
