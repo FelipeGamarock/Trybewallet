@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { saveEmail } from '../actions';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -35,6 +38,9 @@ class Login extends React.Component {
   }
 
   effectLogin = () => {
+    const { email } = this.state;
+    const { dispatchEmail } = this.props;
+    dispatchEmail(email);
     this.setState({
       redirect: true,
     });
@@ -75,4 +81,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatchEmail: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchEmail: (email) => dispatch(saveEmail(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
