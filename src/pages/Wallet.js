@@ -6,9 +6,9 @@ import Form from '../components/Form';
 import { fetchCurrencies } from '../actions';
 
 class Wallet extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { dispatchCurrencies } = this.props;
-    dispatchCurrencies();
+    await dispatchCurrencies();
   }
 
   render() {

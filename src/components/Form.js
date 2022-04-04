@@ -41,22 +41,21 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="currency">
-          Moeda:
           <select
-            type="text"
             data-testid="currency-input"
             name="currency"
             value={ currency }
             onChange={ this.handleInput }
           >
-            {/* { currencies.map((moeda) => <option key={ moeda }>{ moeda }</option>) } */}
+            {currencies
+              .map((moeda) => <option key={ moeda }>{ moeda }</option>)}
           </select>
+          Moeda:
         </label>
 
         <label htmlFor="paymentMethod">
           Método de pagamento:
           <select
-            type="text"
             data-testid="method-input"
             name="paymentMethod"
             value={ paymentMethod }
@@ -75,7 +74,8 @@ class Form extends React.Component {
             value={ category }
             onChange={ this.handleInput }
           >
-            { CATEGORIAS.map((categoria) => <option key={ categoria }>{ categoria }</option>) }
+            { CATEGORIAS
+              .map((categoria) => <option key={ categoria }>{ categoria }</option>) }
           </select>
         </label>
 
