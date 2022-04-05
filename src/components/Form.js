@@ -34,6 +34,7 @@ class Form extends React.Component {
           <input
             type="number"
             data-testid="value-input"
+            id="spentValue"
             name="spentValue"
             value={ spentValue }
             onChange={ this.handleInput }
@@ -41,7 +42,9 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="currency">
+          Moeda:
           <select
+            id="currency"
             data-testid="currency-input"
             name="currency"
             value={ currency }
@@ -50,13 +53,13 @@ class Form extends React.Component {
             {currencies
               .map((moeda) => <option key={ moeda }>{ moeda }</option>)}
           </select>
-          Moeda:
         </label>
 
         <label htmlFor="paymentMethod">
           Método de pagamento:
           <select
             data-testid="method-input"
+            id="paymentMethod"
             name="paymentMethod"
             value={ paymentMethod }
             onChange={ this.handleInput }
@@ -70,6 +73,7 @@ class Form extends React.Component {
           <select
             type="text"
             data-testid="tag-input"
+            id="category"
             name="category"
             value={ category }
             onChange={ this.handleInput }
@@ -84,6 +88,7 @@ class Form extends React.Component {
           <input
             type="text"
             data-testid="description-input"
+            id="description"
             name="description"
             value={ description }
             onChange={ this.handleInput }
