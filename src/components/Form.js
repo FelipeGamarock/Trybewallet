@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { dispatchExpense } from '../actions';
+
+let EXPENSE_ID = 0;
 
 class Form extends React.Component {
   constructor() {
@@ -21,12 +24,34 @@ class Form extends React.Component {
     });
   }
 
+  handleClick = () => {
+    const { spentValue, currency, paymentMethod, category, description } = this.state;
+    const { sendExpense } = this.props;
+    const newExpense = {
+      id: EXPENSE_ID,
+      value: spentValue,
+      description,
+      currency,
+      method: paymentMethod,
+      tag: category,
+    };
+    sendExpense(newExpense);
+    this.setState({
+      spentValue: '',
+      currency: '',
+      paymentMethod: '',
+      category: '',
+      description: '',
+    });
+    EXPENSE_ID += 1;
+  }
+
   render() {
     const { spentValue, currency, paymentMethod, category, description } = this.state;
     const { currencies } = this.props;
     const METODOS = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const CATEGORIAS = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-    console.log(currencies);
+
     return (
       <form>
         <label htmlFor="spentValue">
@@ -95,16 +120,30 @@ class Form extends React.Component {
           />
         </label>
 
+        <button
+          type="button"
+          id="addButton"
+          name="addButton"
+          onClick={ this.handleClick }
+        >
+          Adicionar despesa
+        </button>
+
       </form>);
   }
 }
 
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sendExpense: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(Form);
+const mapDispatchToProps = (dispatch) => ({
+  sendExpense: (expense) => dispatch(dispatchExpense(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
