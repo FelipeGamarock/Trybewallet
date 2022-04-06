@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 class Header extends React.Component {
   render() {
     const { userEmail, expenses } = this.props;
-    const total = expenses.reduce((acc, curr) => {
-      acc += curr.value * parseFloat(curr.exchangeRates[curr.currency].ask);
-      return acc;
-    }, 0);
+    const total = (expenses.length > 0
+      ? expenses.reduce((acc, curr) => {
+        acc += curr.value * parseFloat(curr.exchangeRates[curr.currency].ask);
+        return acc;
+      }, 0)
+      : 0);
     return (
       <header>
         <h2 data-testid="email-field">{ userEmail }</h2>

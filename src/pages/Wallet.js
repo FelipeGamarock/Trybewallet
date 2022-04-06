@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import Header from '../components/Header';
 import Form from '../components/Form';
+import ExpensesTable from '../components/ExpensesTable';
+
 import { fetchCurrencies } from '../actions';
 
 class Wallet extends React.Component {
@@ -16,6 +19,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <Form />
+        <ExpensesTable />
       </div>);
   }
 }

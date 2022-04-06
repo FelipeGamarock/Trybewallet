@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import { dispatchExpense } from '../actions';
 
 let EXPENSE_ID = 0;
-
+const ALIMENTAÇAO = 'Alimentação';
 class Form extends React.Component {
   constructor() {
     super();
 
     this.state = {
       spentValue: '',
-      currency: '',
-      paymentMethod: '',
-      category: '',
+      currency: 'USD',
+      paymentMethod: 'Dinheiro',
+      category: ALIMENTAÇAO,
       description: '',
     };
   }
@@ -38,9 +38,9 @@ class Form extends React.Component {
     sendExpense(newExpense);
     this.setState({
       spentValue: '',
-      currency: '',
-      paymentMethod: '',
-      category: '',
+      currency: 'USD',
+      paymentMethod: 'Dinheiro',
+      category: ALIMENTAÇAO,
       description: '',
     });
     EXPENSE_ID += 1;
